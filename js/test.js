@@ -8,7 +8,13 @@ Username.prototype.getUsername = function(username, displayFunction) {
   $.get('https://api.github.com/users/' + username + '?access_token=' + apiKey, function(response) {
     displayFunction(username, response.login);
   }).fail(function(error){
-    $('.showRepos').test(error.responsJSON.message);
+    $('.showRepos').text(error.responseJSON.message);
+  });
+}
+
+Username.prototype.getRepos = function(username, displayFunction) {
+  $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey, function(response){
+    console.log(response);
   });
 }
 
