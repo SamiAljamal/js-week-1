@@ -2,8 +2,8 @@ var Username = require('./../js/test.js').usernameModule;
 var displayUsername = function(username, usernameData) {
   $('.showRepos').text("The username you have chosen to view is " + usernameData + ". These are their repos:");
 }
-var displayRepos = function(username, repoData) {
-  $("ul#userRepos").append("<li>" + repoData + "</li>");
+var displayRepos = function(username, repoName, repoDescription) {
+  $("ul#userRepos").append("<li>" + repoName + "</li>" + "<ul><li>" + repoDescription + "</li></ul>");
 }
 
 var apiKey = require('./../.env').apiKey;
@@ -18,14 +18,6 @@ $(document).ready(function(){
     $('#username').val("");
     currentUsernameObject.getRepos(username, displayRepos);
 
-
-    // $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey, function(response) {
-    //   response.forEach(function(response)
-    //   { console.log(response.name)
-    //     debugger;
-    //     $("ul#userRepos").append("<li>" + response.name + "</li>");
-    //   });
-    // });
 
 
 
