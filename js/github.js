@@ -1,27 +1,24 @@
-// function Repo(){
-//
-// }
-//
-// Repo.prototype.getRepo = function(username, displayFunction){
-//   $.get('https://api.github.com/users/' + username + '?access_token=' + apiKey.then(function(response) {
-//     displayFunction(username, response.repos_url);
-//   }).fail(function(error){
-//     console.log(error.responseJSON.message);
-//   })
-// );
-// };
-//
-// exports.repoModule = Repo;
+var apiKey = require('./../.env').apiKey;
 
+function Username(){
+}
 
-// exports.getRepos = function(){
-//   $.get('https://api.github.com/users/daneden?access_token=' + apiKey).then(function(response){
-//     console.log(response);
-//   }).fail(function(error){
-//     console.log(error.responseJSON.message);
-//   });
-// };
+Username.prototype.getRepos = function(username, displayFunction) {
+  $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey, function(response) {
+    response.forEach(function(response){
+      displayFunction(username, response.name, response.description);
+    });
+  }).fail(function(error){
+    $('.showRepos').text(error.responseJSON.message);
+  });
+};
 
+Username.prototype.getUsername = function(username, displayFunction) {
+  $.get('https://api.github.com/users/' + username + '?access_token=' + apiKey, function(response) {
+    displayFunction(username, response.avatar_url, response.name, response.login);
+  }).fail(function(error){
+    $('.showRepos').text(error.responseJSON.message);
+  });
+};
 
-
-// module.exports.getRepos = getRepos;
+exports.usernameModule = Username;
