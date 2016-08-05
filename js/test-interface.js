@@ -1,30 +1,26 @@
 var Username = require('./../js/test.js').usernameModule;
-var displayUsername = function(username, usernameData) {
-  $('.showRepos').text("The username you have chosen to view is " + usernameData + ". These are their repos:");
-}
 var displayRepos = function(username, repoName, repoDescription) {
   $("ul#userRepos").append("<li>" + repoName + "</li>" + "<ul><li>" + repoDescription + "</li></ul>");
-}
-
-var apiKey = require('./../.env').apiKey;
-
+};
+var displayUsername = function(username, userAvatar, userRealName, usernameData) {
+  $('.showRepos').append("<img src= " + userAvatar + " alt='avatar for user' /><h1>Name: " + userRealName + "</h1><h3>Username: " + usernameData + "</h3>");
+};
 
 
 $(document).ready(function(){
   var currentUsernameObject = new Username();
+  var username
+
   $('#seeRepos').click(function(event){
     event.preventDefault();
-    var username = $('#username').val();
-    $('#username').val("");
+    username = $('#username').val();
     currentUsernameObject.getRepos(username, displayRepos);
-
-
-
-
-    // currentUsernameObject.getUsername(username, displayUsername);
-    // $('#username').val("");
-    // $("ul#userRepos").append("<li>" + username + "</li>");
-
-
   });
+
+  $('#seeUsername').click(function(event){
+    event.preventDefault();
+    username = $('#username').val();
+    currentUsernameObject.getUsername(username, displayUsername);
+  });
+
 });
