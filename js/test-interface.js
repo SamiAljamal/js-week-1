@@ -12,21 +12,22 @@ $(document).ready(function(){
   $('#seeRepos').click(function(event){
     event.preventDefault();
     var username = $('#username').val();
-    $('#username').val("");
-    currentUsernameObject.getUsername(username, displayUsername);
-    $("ul#userRepos").append("<li>" + username + "</li>");
-
-
-
-
-
 
 
     $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey, function(response) {
       response.forEach(function(response)
       { console.log(response.name)
+        debugger;
         $("ul#userRepos").append("<li>" + response.name + "</li>");
       });
     });
+
+
+
+    // currentUsernameObject.getUsername(username, displayUsername);
+    // $('#username').val("");
+    // $("ul#userRepos").append("<li>" + username + "</li>");
+
+
   });
 });

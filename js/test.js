@@ -12,10 +12,19 @@ Username.prototype.getUsername = function(username, displayFunction) {
   });
 }
 
-Username.prototype.getRepos = function(username, displayFunction) {
-  $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey, function(response){
-    console.log(response);
-  });
+Username.prototype.getRepose = function(username, displayFunction) {
+  $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey, function(response) {
+    response.forEach(function(response)
+    displayFunction(username, response.name);
+  }).fail(function(error{
+
+  }))
 }
+
+// Username.prototype.getRepos = function(username, displayFunction) {
+//   $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey, function(response){
+//     console.log(response);
+//   });
+// }
 
 exports.usernameModule = Username;
