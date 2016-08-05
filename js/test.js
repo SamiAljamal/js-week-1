@@ -4,22 +4,24 @@ function Username(){
 
 }
 
-Username.prototype.getUsername = function(username, displayFunction) {
-  $.get('https://api.github.com/users/' + username + '?access_token=' + apiKey, function(response) {
-    displayFunction(username, response.login);
+// Username.prototype.getUsername = function(username, displayFunction) {
+//   $.get('https://api.github.com/users/' + username + '?access_token=' + apiKey, function(response) {
+//     displayFunction(username, response.login);
+//   }).fail(function(error){
+//     $('.showRepos').text(error.responseJSON.message);
+//   });
+// }
+
+Username.prototype.getRepos = function(username, displayFunction) {
+  $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey, function(response) {
+    response.forEach(function(response)
+    {displayFunction(username, response.name);
+  })
   }).fail(function(error){
     $('.showRepos').text(error.responseJSON.message);
   });
 }
 
-Username.prototype.getRepose = function(username, displayFunction) {
-  $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey, function(response) {
-    response.forEach(function(response)
-    displayFunction(username, response.name);
-  }).fail(function(error{
-
-  }))
-}
 
 // Username.prototype.getRepos = function(username, displayFunction) {
 //   $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey, function(response){
